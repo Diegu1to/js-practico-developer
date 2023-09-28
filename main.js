@@ -3,8 +3,11 @@ const iconMobMenu = document.querySelector(".menu");
 const menuCarritoIcon = document.querySelector(".navbar-shopping-cart");
 const desktopMenu = document.querySelector(".desktop-menu");
 const mobileMenu = document.querySelector(".mobile-menu");
-const aside = document.querySelector(".product-detail");
+const shoppingCartContanier = document.querySelector("#shoppingCartContainer");
 const cardsContainer = document.querySelector(".cards-container");
+
+
+const productList = [];
 
 
 
@@ -13,11 +16,13 @@ iconMobMenu.addEventListener("click", toggleMobileMenu)
 menuCarritoIcon.addEventListener("click", toggleCarritoAside)
 
 
+// Funciones para esconder el menu, el carrito aside dependiendo de sí es version mobil o escritorio, etc.
+
 function toggleDesktopMenu() {
-    const isAsideClosed = aside.classList.contains("inactive");
+    const isAsideClosed = shoppingCartContanier.classList.contains("inactive");
 
     if (!isAsideClosed) {
-        aside.classList.add("inactive");
+        shoppingCartContanier.classList.add("inactive");
     }
     
 
@@ -26,10 +31,10 @@ function toggleDesktopMenu() {
 }
 
 function toggleMobileMenu() {
-    const isAsideClosed = aside.classList.contains("inactive");
+    const isAsideClosed = shoppingCartContanier.classList.contains("inactive");
 
     if (!isAsideClosed) {
-        aside.classList.add("inactive");
+        shoppingCartContanier.classList.add("inactive");
     }
 
 
@@ -49,11 +54,13 @@ function toggleCarritoAside() {
     }
 
 
-    aside.classList.toggle("inactive")
+    shoppingCartContanier.classList.toggle("inactive")
 
 }
 
-const productList = [];
+
+
+// Productos 
 
 productList.push({
     name: "Bike",
@@ -85,7 +92,7 @@ productList.push({
     Image: "https://madeira.com.co/cdn/shop/products/8011003845132_1_2000x.jpg?v=1625352316",
 });
 
-
+// Maquetación de html, para cada producto(cuadro con su img nombre precio y carito de compras)
 function renderProducts(arr) {
     for (product of arr) {
         const productCard = document.createElement("div");

@@ -18,6 +18,15 @@
     font-family:"Quicksand";
 }
 
+
+.product-detail {
+    width: 360px;
+    padding-bottom: 24px;
+    font-family:"Quicksand";
+    position: absolute;
+    right: 0;
+}
+
 .primary-bottom {
     background-color: var(--hospital-green);
     border-radius: 8px;
@@ -36,13 +45,6 @@
     justify-content: center;
 }
 
-.product-detail {
-    width: 360px;
-    padding-bottom: 24px;
-    font-family:"Quicksand";
-    position: absolute;
-    right: 0;
-}
 
 .product-detail-close {
     background: var(--white);
