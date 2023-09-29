@@ -1,66 +1,21 @@
 const menuEmail = document.querySelector(".navbar-email");
 const iconMobMenu = document.querySelector(".menu");
 const menuCarritoIcon = document.querySelector(".navbar-shopping-cart");
+const productDetailCloseIcon = document.querySelector(".product-detail-close");
 const desktopMenu = document.querySelector(".desktop-menu");
 const mobileMenu = document.querySelector(".mobile-menu");
 const shoppingCartContanier = document.querySelector("#shoppingCartContainer");
+const productDetailContainer = document.querySelector("#productDetail");
 const cardsContainer = document.querySelector(".cards-container");
 
 
-const productList = [];
-
-
-
-menuEmail.addEventListener("click", toggleDesktopMenu)
-iconMobMenu.addEventListener("click", toggleMobileMenu)
-menuCarritoIcon.addEventListener("click", toggleCarritoAside)
-
-
-// Funciones para esconder el menu, el carrito aside dependiendo de sí es version mobil o escritorio, etc.
-
-function toggleDesktopMenu() {
-    const isAsideClosed = shoppingCartContanier.classList.contains("inactive");
-
-    if (!isAsideClosed) {
-        shoppingCartContanier.classList.add("inactive");
-    }
-    
-
-    desktopMenu.classList.toggle("inactive");
-
-}
-
-function toggleMobileMenu() {
-    const isAsideClosed = shoppingCartContanier.classList.contains("inactive");
-
-    if (!isAsideClosed) {
-        shoppingCartContanier.classList.add("inactive");
-    }
-
-
-    mobileMenu.classList.toggle("inactive");
-}
-
-function toggleCarritoAside() {
-    const isMobileMenuClosed = mobileMenu.classList.contains("inactive");
-    const desktopMenuClosed = desktopMenu.classList.contains("inactive");
-
-    if (!isMobileMenuClosed) {
-        mobileMenu.classList.add("inactive");
-    }
-
-    if (!desktopMenuClosed) {
-        desktopMenu.classList.add("inactive");
-    }
-
-
-    shoppingCartContanier.classList.toggle("inactive")
-
-}
 
 
 
 // Productos 
+
+const productList = [];
+
 
 productList.push({
     name: "Bike",
@@ -92,6 +47,76 @@ productList.push({
     Image: "https://madeira.com.co/cdn/shop/products/8011003845132_1_2000x.jpg?v=1625352316",
 });
 
+
+
+menuEmail.addEventListener("click", toggleDesktopMenu);
+iconMobMenu.addEventListener("click", toggleMobileMenu);
+menuCarritoIcon.addEventListener("click", toggleCarritoAside);
+productDetailCloseIcon.addEventListener("click", closeProductDetailAside);
+
+
+
+// Funciones para esconder el menu, el carrito aside dependiendo de sí es version mobil o escritorio, etc.
+
+function toggleDesktopMenu() {
+    const isAsideClosed = shoppingCartContanier.classList.contains("inactive");
+
+    if (!isAsideClosed) {
+        shoppingCartContanier.classList.add("inactive");
+    }
+    
+
+    desktopMenu.classList.toggle("inactive");
+
+}
+
+function toggleMobileMenu() {
+    const isAsideClosed = shoppingCartContanier.classList.contains("inactive");
+
+    if (!isAsideClosed) {
+        shoppingCartContanier.classList.add("inactive");
+    }
+
+    closeProductDetailAside();
+
+    mobileMenu.classList.toggle("inactive");
+}
+
+function toggleCarritoAside() {
+    const isMobileMenuClosed = mobileMenu.classList.contains("inactive");
+
+    if (!isMobileMenuClosed) {
+        mobileMenu.classList.add("inactive");
+    }
+
+    const productDetailClosed = productDetailContainer.classList.contains("inactive");
+
+    if (!productDetailClosed) {
+        productDetailContainer.classList.add("inactive");
+    }
+
+    const desktopMenuClosed = desktopMenu.classList.contains("inactive");
+
+    if (!desktopMenuClosed) {
+        desktopMenu.classList.add("inactive");
+    }
+
+
+    shoppingCartContanier.classList.toggle("inactive")
+
+}
+
+function openProductDetailAside() {
+    shoppingCartContanier.classList.add("inactive");
+    productDetailContainer.classList.remove("inactive");
+}
+
+function closeProductDetailAside() {
+    productDetailContainer.classList.add("inactive");
+}
+
+
+
 // Maquetación de html, para cada producto(cuadro con su img nombre precio y carito de compras)
 function renderProducts(arr) {
     for (product of arr) {
@@ -101,6 +126,7 @@ function renderProducts(arr) {
         // product = {name, price, image} -> product.image
         const productImg = document.createElement("img");
         productImg.setAttribute("src", product.Image);
+        productImg.addEventListener("click", openProductDetailAside);
     
         const productInfo = document.createElement("div");
         productInfo.classList.add("product-info");
